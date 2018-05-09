@@ -1,4 +1,5 @@
-# encoding=utf-8
+﻿# encoding=utf-8
+#Copyright (c) 2018.5.9 ChaunLin Wan All rights reserved.
 import requests
 from bs4 import BeautifulSoup
 import time
