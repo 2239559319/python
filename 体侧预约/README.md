@@ -6,8 +6,8 @@
 步骤
 1安装python2(3)（在安装时将python加进环境变量）
 2在命令行键入以下命令
-  pip install requests
-  pip install beautifulsoup4
+   pip install requests
+   pip install beautifulsoup4
 3继续键入命令
   cd 文件工作目录
   python 3.py
