@@ -1,0 +1,1309 @@
+C:\python3.6\python.exe C:/Users/w2239/Desktop/python/2/Three_project/xinjiaowuxitong/1.py
+登录成功
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+
+    <title>选课</title>
+    <link rel="shortcut icon" href="/img/icon/favicon.ico" type="image/x-icon"/>
+    <meta name="description" content="overview &amp; stats"/>
+    <!-- bootstrap & fontawesome -->
+    
+    <link rel="stylesheet" href="/css/xk/xk.css"/>
+
+    
+
+    <link rel="stylesheet" href="/assets/font-awesome/4.1.0/css/font-awesome.min.css"/>
+
+
+    <!-- text fonts -->
+    
+    
+
+    <!-- ace styles -->
+    
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ace-part2.min.css"/>
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ace-ie.min.css"/>
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+    <script src="/assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+    <!--[if lte IE 8]>
+    <script src="/assets/js/html5shiv.min.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+    <script src="/assets/js/jquery/jquery-2.1.1.min.js"></script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script src="/assets/js/jquery/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/assets/js/jquery.min.js'>" + "<" + "/script>");
+    </script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/assets/js/jquery1x.min.js'>" + "<" + "/script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="/assets/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+    <!--[if lte IE 8]>
+    <script src="/assets/js/excanvas.min.js"></script>
+    <![endif]-->
+
+    <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+
+    <!-- ace scripts -->
+    
+    <script src="/assets/js/ace.all.min.js"></script>
+
+    <!-- commoncss -->
+    <link rel="stylesheet" href="/css/commons/commoncss.css" type="text/css"/>
+    <!-- commoncss -->
+
+    <script type="text/javascript" src="/js/jQuery/jquery.cookie.js"></script>
+
+    <!-- alert -->
+    
+    <script type="text/javascript" src="/assets/layer/layer.js"></script>
+    <!-- alert -->
+    <script type="text/javascript" src="/js/customjs/urpjs.js"></script>
+    
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<script type="text/javascript">
+			window.onload=function(){
+				if ($("#faxk").css("display") != "none") {
+					$("#faxk").click();
+					$("#faxk").addClass("active");
+				} else {
+					$("#jhxk").click();
+					$("#jhxk").addClass("active");
+				}
+			};
+			function kc(o,src){
+				document.getElementById("ifra").src=src;
+			}
+			
+			
+			function quxiao(){
+				var tabname = $("#myTab4 .active a").html();
+				$("#ifra")[0].contentWindow.jhqx();
+			}
+			function tijiao(){
+				var tabname = $("#myTab4 .active a").html();
+				$("#ifra")[0].contentWindow.xuanze();
+
+				var kcids = $(window.frames["ifra"].document).find("#kcIds");
+				if(!kcids || !$(kcids).val()){
+					urp.alert("您还未选择课程！");
+					return;
+				}
+				$(window.frames["ifra"].document).find("form[name='frm']")[0].submit();
+			}
+
+			jQuery(function($) {
+				if(!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)){
+					$('#submitButton').on(ace.click_event, function () {
+						var btn = $(this);
+						btn.button('loading');
+						setTimeout(function () {
+							btn.button('reset');
+						}, 1000);
+					});
+				}
+
+				$('#id-button-borders').attr('checked' , 'checked').on('click', function(){
+					$('#default-buttons .btn').toggleClass('no-border');
+				});
+			});
+
+
+			function changeFrameHeight(){
+			    var ifm= document.getElementById("ifra");
+			   	var h =document.documentElement.clientHeight-$("#iframe-xk").offset().top-40;
+			    ifm.height = h;
+			    if(typeof window.ifra.resizediv === 'function'){
+				    window.ifra.resizediv();
+			    }
+				var tabname = $("#myTab4 .active a").html();
+				if(tabname=="方案课程"){
+					$(window.frames["ifra"].document).find("#div_kc_tj").on("click","tr",closetimefilter);
+					$("body").on("click",closetimefilter);
+				}
+			}
+			
+			function closetimefilter(){
+				if($(window.frames["ifra"].document).find("#div_kbt").position.top>=0){
+					$(window.frames["ifra"].document).find("#lal-sxl").click();
+				}
+			}
+			
+			$(function(){
+				window.onresize=function(){
+				    changeFrameHeight();  
+				};
+			});
+		</script>
+		<style>
+			.right_top_oper1 {
+				float:right;
+				font-size:14px;
+				margin:0 20px;
+				position: relative;
+				top:-6px;
+			}
+		</style>
+	
+
+</head>
+<body class="no-skin">
+
+<!-- 查看详情专用 -->
+<div class="modal fade" id="view-table" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:60%;">
+        <div class="modal-content">
+            <div class="center">
+                <span class="view-pre-loading"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查看详情专用 -->
+
+<div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            <span class="sr-only">Toggle sidebar</span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="navbar-header pull-left">
+            <a href="/" class="navbar-brand" id='0' onclick="toSelect(this);">
+                <small style="font-weight:700;font-family:微软雅黑">
+                    <!--
+                    <i class="fa fa-leaf"></i>
+                    Ace Admin
+                     -->
+                    
+                    四川大学教务管理系统
+                </small>
+            </a>
+        </div>
+
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                
+                <li class="green" style="text-align: center">
+                    <a href="#"
+                       onclick="javascript:window.open('http://jwc.scu.edu.cn/article/206/206_1.htm');">
+                        <i class="ace-icon fa fa-calendar"></i>学校校历
+                    </a>
+                </li>
+                <li class="grey" style="text-align: center">
+                    <a  href="#"
+                        onclick="openWorkRestSchedule();return false;">
+                        <i class="ace-icon fa fa-clock-o"></i>作息时间表
+                    </a>
+                </li>
+                <!-- 展示当前的学期季度信息 -->
+                <li class="light-red" style="text-align: center">
+                    <a href="#">
+                        <i class="ace-icon fa fa-calendar"></i>
+
+
+2018-2019 秋  第4周   星期二
+                    </a>
+                </li>
+                
+                
+                <li class="light-blue" style="text-align: center">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="/img/head/man.png" onerror="this.src='/assets/avatars/user.jpg'"
+                             alt="Jason's Photo"/>
+								<span class="user-info">
+									<small>欢迎您，</small>
+									
+
+
+万川琳
+								</span>
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="/" title="主页" id='0' onclick="toSelect(this);">
+                                <i class="ace-icon fa fa-home"></i>首页
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:changePassword('/student/rollManagement/personalInfoUpdate/updatePassword')">
+                                <i class="ace-icon fa fa-user"></i>
+                                修改密码
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a id="logout" href="/logout" title="退出系统">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                注销
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- 主页 -->
+                <!-- <li class="light-blue" style="text-align: center" >
+                     <a href="/" title="主页" id='0' onclick="toSelect(this);">
+                        <i class="ace-icon fa fa-home"></i>
+                    </a>
+                </li>
+                <li  class="light-blue" style="text-align: center" >
+                    <a id="logout" href="/logout" title="退出系统"">
+                        <i class="ace-icon fa fa-power-off"></i>
+                    </a>
+                </li> -->
+
+            </ul>
+        </div>
+    </div>
+    <!-- /.navbar-container -->
+</div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+
+        function SchoolCalendar() {
+            $(".modal-content").html("<iframe width='100%' style='width:100%; min-height:600px; height:100%; overflow: hidden;' src='/indexCalendar' ></iframe>");
+            $("#view-table").modal().show().on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+            });
+        }
+
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+        var isMenuToDeal = true;
+
+        function rootMenuClick(obj) {
+            if (isMenuToDeal && !$(obj).hasClass("open")) {
+                $.each($(obj).find(".hsub"), function () {
+                    if ($(this).hasClass("open")) {
+                        isMenuToDeal = false;
+                    }
+                });
+            } else {
+                isMenuToDeal = false;
+            }
+
+            if (isMenuToDeal) {
+                var firobj = $(obj).children("ul").children("li").first();
+                firobj.addClass("open");
+                $(firobj).children("ul").css("display", "block");
+            } else {
+                isMenuToDeal = true;
+            }
+        }
+
+        function stopHere(e) {
+            isMenuToDeal = false;
+        }
+
+        /*菜单上的搜索框*/
+        $(document).ready(function () {
+            var obj_lis = $("#menus").find("li > ul > li > ul > li");
+            var obj_menus = new Array();
+            for (i = 0; i < obj_lis.length; i++) {
+                obj_menus[i] = $.trim($(obj_lis[i]).find("a:first").text());
+            }
+            try {
+                $("#search-input").bs_typeahead({
+                    source: obj_menus,
+                    updater: function (a) {
+                        for (i = 0; i < obj_lis.length; i++) {
+                            if (a == $.trim($(obj_lis[i]).find("a:first").text())) {
+                                $.cookie('selectionBar', obj_lis[i].id, {
+                                    path: '/'
+                                });
+                                window.location.href = $(obj_lis[i]).find("a:first").attr("href");
+                                break;
+                            }
+                        }
+                        return a;
+                    }
+                })
+            } catch (a) {
+            }
+        });
+
+        function changePassword(url) {
+            ///student/rollManagement/personalInfoUpdate/updatePassword
+            $('#view-table').modal({
+                remote: url
+            }).on("hidden.bs.modal", function () {
+                /*$("div").remove(".widget-box");*/
+                $(this).removeData("bs.modal");
+            }).css({
+                width: 'auto'
+            });
+        }
+
+    </script>
+
+    <style type="text/css">
+        .sidebar > .nav-search {
+            position: static;
+            background-color: #FAFAFA;
+            border-bottom: 1px solid #DDD;
+            text-align: center;
+            height: 35px;
+            padding-top: 0px;
+        }
+
+        .sidebar > .nav-search .nav-search-input {
+            width: 162px !important;
+            border-radius: 5px !important;
+            max-width: 162px !important;
+            opacity: 1 !important;
+            filter: alpha(opacity=100) !important;
+        }
+
+        #breadcrumbs li {
+            cursor: pointer;
+        }
+    </style>
+    <div id="sidebar" class="sidebar responsive sidebar-fixed">
+
+        <div class="nav-search" style="margin-top: 6px;background-color:rgba(0,0,0,0)">
+            <form class="form-search">
+							<span class="input-icon">
+								<input type="text" placeholder="查找功能..." class="nav-search-input" id="search-input"
+                                       autocomplete="off">
+								<i class="ace-icon fa fa-search blue" style="z-index:0"></i>
+							</span>
+            </form>
+        </div>
+        
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'fixed')
+            } catch (e) {
+            }
+        </script>
+
+        <ul class="nav nav-list" id="menus">
+            
+            <li class="" id="1181690" onclick="rootMenuClick(this);">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-tachometer"></i>
+                    <span class="menu-text"> 个人管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+                
+                <ul class="submenu" onclick="stopHere();">
+                    
+                    <li class="" id="1188620">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            学籍管理
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1183421" onclick="toSelect(this);">
+                                <a href="/student/rollManagement/rollInfo/index">&nbsp;&nbsp;
+                                    学生学籍信息
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1183422" onclick="toSelect(this);">
+                                <a href="/student/rollManagement/personalInfoUpdate/index">&nbsp;&nbsp;
+                                    个人信息修改
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1183423" onclick="toSelect(this);">
+                                <a href="/student/rollManagement/rollChanges/index">&nbsp;&nbsp;
+                                    学籍异动
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1183424" onclick="toSelect(this);">
+                                <a href="/student/rollManagement/rewardsAndPenalties/index">&nbsp;&nbsp;
+                                    奖惩信息
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1183425" onclick="toSelect(this);">
+                                <a href="/student/rollManagement/electronicRegistration/index">&nbsp;&nbsp;
+                                    电子注册
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1183426" onclick="toSelect(this);">
+                                <a href="/student/rollManagement/minorProgramRegistration/index">&nbsp;&nbsp;
+                                    辅修方案注册
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="1188621">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            学生异动
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1183428" onclick="toSelect(this);">
+                                <a href="/student/personalManagement/studentChange/index">&nbsp;&nbsp;
+                                    学籍异动申请
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="" id="82020" onclick="rootMenuClick(this);">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text"> 选课管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+                
+                <ul class="submenu" onclick="stopHere();">
+                    
+                    <li class="" id="125803145">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            教材
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="125803146" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/books/dealBooks/index">&nbsp;&nbsp;
+                                    选定教材
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="82021">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            本学期课表
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="82022" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/thisSemesterCurriculum/index">&nbsp;&nbsp;
+                                    本学期课表
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1162620" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/calendarSemesterCurriculum/index">&nbsp;&nbsp;
+                                    历年学期课表
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="1293220">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            选课管理
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1293217" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/courseSelectNotice/index">&nbsp;&nbsp;
+                                    选课公告
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1293218" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/courseSelect/index">&nbsp;&nbsp;
+                                    选课
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1293219" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/courseSelectResult/index">&nbsp;&nbsp;
+                                    选课结果
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1293221" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/quitCourse/index">&nbsp;&nbsp;
+                                    退课
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1298420" onclick="toSelect(this);">
+                                <a href="/student/courseSelect/courseSelectFailed/index">&nbsp;&nbsp;
+                                    选课失败信息
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="" id="12580300" onclick="rootMenuClick(this);">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-pencil-square-o"></i>
+                    <span class="menu-text"> 教学评估 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+                
+                <ul class="submenu" onclick="stopHere();">
+                    
+                    <li class="" id="12580301">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            评估
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="12580302" onclick="toSelect(this);">
+                                <a href="/student/teachingEvaluation/evaluation/index">&nbsp;&nbsp;
+                                    教学评估
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="" id="1423377" onclick="rootMenuClick(this);">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text"> 考务管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+                
+                <ul class="submenu" onclick="stopHere();">
+                    
+                    <li class="" id="1423378">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            考务管理
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1423379" onclick="toSelect(this);">
+                                <a href="/student/examinationManagement/examPlan/index">&nbsp;&nbsp;
+                                    考试安排
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1423380" onclick="toSelect(this);">
+                                <a href="/student/examinationManagement/examSignUp/index">&nbsp;&nbsp;
+                                    考试报名
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1423381" onclick="toSelect(this);">
+                                <a href="/student/examinationManagement/examGrade/index">&nbsp;&nbsp;
+                                    考试成绩
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="" id="1423370" onclick="rootMenuClick(this);">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-calendar"></i>
+                    <span class="menu-text"> 教学资源 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+                
+                <ul class="submenu" onclick="stopHere();">
+                    
+                    <li class="" id="1423371">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            教学资源
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1423372" onclick="toSelect(this);">
+                                <a href="/student/teachingResources/classroomCurriculum/index">&nbsp;&nbsp;
+                                    教室课表
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1423373" onclick="toSelect(this);">
+                                <a href="/student/teachingResources/teacherCurriculum/index">&nbsp;&nbsp;
+                                    教师课表
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1423374" onclick="toSelect(this);">
+                                <a href="/student/teachingResources/classCurriculum/index">&nbsp;&nbsp;
+                                    班级课表
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1423384" onclick="toSelect(this);">
+                                <a href="/student/teachingResources/courseCurriculum/index">&nbsp;&nbsp;
+                                    课程课表
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="1443371">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            自习查询
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1443372" onclick="toSelect(this);">
+                                <a href="/student/teachingResources/freeClassroom/index">&nbsp;&nbsp;
+                                    空闲教室查询
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1443384" onclick="toSelect(this);">
+                                <a href="/student/teachingResources/classroomUseStatus/index">&nbsp;&nbsp;
+                                    教室使用状况查询
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="" id="1377620" onclick="rootMenuClick(this);">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-picture-o"></i>
+                    <span class="menu-text"> 综合查询 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+                
+                <ul class="submenu" onclick="stopHere();">
+                    
+                    <li class="" id="1377621">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            成绩查询
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1379870" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/scoreQuery/allPassingScores/index">&nbsp;&nbsp;
+                                    全部及格成绩
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1417250" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/scoreQuery/coursePropertyScores/index">&nbsp;&nbsp;
+                                    课程属性成绩
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1443373" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/scoreQuery/schemeScores/index">&nbsp;&nbsp;
+                                    方案成绩
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1443374" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/scoreQuery/unpassedScores/index">&nbsp;&nbsp;
+                                    不及格成绩
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1443375" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/scoreQuery/thisTermScores/index">&nbsp;&nbsp;
+                                    本学期成绩
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="1377622">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            培养方案完成情况
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1377623" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/planCompletion/index">&nbsp;&nbsp;
+                                    方案完成情况
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="1443376">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            指导性计划完成情况
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1443377" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/instructionPlanQuery/detail/index">&nbsp;&nbsp;
+                                    指导性教学计划
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="1443378">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            课程
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1443379" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/course/courseSchdule/index">&nbsp;&nbsp;
+                                    本学期课程安排
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1443380" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/course/courseBasicInformation/basicInf">&nbsp;&nbsp;
+                                    课程基本信息
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                    <li class="" id="1443381">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            教材
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        
+                        <ul class="submenu">
+                            
+                            <li class="" id="1443382" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/teachingMaterial/SelectionSearch/index">&nbsp;&nbsp;
+                                    教材选定查询
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="" id="1443383" onclick="toSelect(this);">
+                                <a href="/student/integratedQuery/teachingMaterial/ReceiveSearch/index">&nbsp;&nbsp;
+                                    教材领取查询
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                        </ul>
+
+                        
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+
+        </ul>
+        <!-- /.nav-list -->
+
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+               data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'collapsed')
+            } catch (e) {
+            }
+        </script>
+    </div>
+
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {
+                }
+            </script>
+
+            <ul class="breadcrumb">
+                <li onclick="javascript:window.location.href='/'" style="cursor:pointer;">
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    首页
+                </li>
+                <li class="active" onclick="ckickTopMenu(this);return false;" id="firmenu">一级菜单</li>
+                <li class="active" onclick="ckickTopMenu(this);return false;" id="secmenu">二级菜单</li>
+                <li class="active" onclick="ckickTopMenu(this);return false;" id="lastmenu">三级菜单</li>
+            </ul>
+            <!-- /.breadcrumb -->
+        </div>
+
+        <div class="page-content" id="page-content-template" style="padding:12px;">
+
+            
+		<div class="row">
+        	<div class="col-sm-12 self-margin">
+				<div id="mainDIV">
+					<h4 class="header smaller lighter grey" style="margin-top: 6px">
+						<i class="fa fa-check-square-o"></i> 选课
+						(2018-2019学年秋
+								<font color="blue">计算机科学与技术培养方案</font>
+								<font color="red">主修</font>)
+						<span id="btn-submit-xk" class="right_top_oper1">
+							<button id="submitButton" title='确认选择' type="button"
+								class="btn btn-xs btn-round btn-success"
+									data-loading-text="正在保存..."
+								onclick="tijiao();return false;">
+								<i class="ace-icon fa fa-check bigger-120"></i> 提交
+							</button>
+							<button title='重置' type="button"
+								class="btn btn-xs btn-round"
+								onclick="quxiao();return false;">
+								<i class="ace-icon fa fa-undo bigger-120"></i> 重置
+							</button>
+						</span>
+					</h4>
+					<form action="/xktempjump" name="xktempjump"></form>
+					
+					<div class="col-xs-12" style="padding-left:0;padding-right:0;">
+						<div align="center">
+							<div class="tabbable">
+								<input type="hidden" id="liN" value="01"/>
+								<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+									<li title="计划选课" id="jhxk" onclick="kc(this,'/student/courseSelect/intentCourse/index?fajhh=3623')">
+										<a data-toggle="tab" href="#iframe-xk">计划选课</a>
+									</li>
+		
+									<li title="方案选课" id="faxk" class="" onclick="kc(this,'/student/courseSelect/planCourse/index?fajhh=3623')">
+										<a data-toggle="tab" href="#iframe-xk">方案选课</a>
+									</li>
+									
+									<li title="系任选课" id="xirxk" class="" onclick="kc(this,'/student/courseSelect/departCourse/index?fajhh=3623')">
+										<a data-toggle="tab" href="#iframe-xk">系任选课</a>
+									</li>
+									
+									<li title="校任选课" id="xarxk" class="" onclick="kc(this,'/student/courseSelect/schoolCourse/index?fajhh=3623')">
+										<a data-toggle="tab" href="#iframe-xk">校任选课</a>
+									</li>
+									
+									<li title="自由选课" id="zyxk" class="" onclick="kc(this,'/student/courseSelect/freeCourse/index?fajhh=3623')">
+										<a data-toggle="tab" href="#iframe-xk">自由选课</a>
+									</li>
+									
+									<li title="重修选课" id="cxxk" class="" onclick="kc(this,'/student/courseSelect/relearnCourse/index?fajhh=3623')">
+										<a data-toggle="tab" href="#iframe-xk">重修选课</a>
+									</li>
+									<li title="复修选课" id="fxxk" style="display: none;" 
+										onclick="kc(this,'/student/courseSelect/reViewCourse/index?fajhh=3623')">
+										<a data-toggle="tab" href="#iframe-xk">复修选课</a>
+									</li>
+								</ul>
+								<script type="text/javascript">
+									var xsfaxk = '';
+									var xszyxk = '';
+									var xsfxxk = '';
+									if (xsfaxk == "0") {
+										$("#faxk").css("display", "none");
+									}
+									if (xszyxk == "0") {
+										$("#zyxk").css("display", "none");
+									}
+									if (xsfxxk == "1") {
+										$("#fxxk").show();
+									}
+								</script>
+		
+								<div id="tab-content" class="tab-content" style="padding: 0;">
+									<div id="iframe-xk" class="tab-pane active">
+										<iframe id="ifra" name="ifra" frameborder=0 width="100%"  scrolling="no" onload="changeFrameHeight();" src=""></iframe>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+        </div>
+        <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div>
+<!-- /.main-container -->
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var bar = $.cookie('selectionBar');
+        if (bar && bar != 0) {
+            if (true) {
+                var barObj = document.getElementById(bar);
+                var pts = $("#" + bar).parents("li");
+                for (var i = 0; i < pts.length; i++) {
+                    pts[i].className = "active open";
+                }
+                barObj == null ? barObj = document.getElementById(bar) : barObj.className = "active";
+                $(barObj).find("a").prepend("<i class='menu-icon fa fa-caret-right'></i>");
+            }
+
+            var lastmenu = $("#" + bar).find("a").first().text();
+            var secmenu = $("#" + bar).parent().parent().find("a").first().text();
+            var firmenu = $("#" + bar).parent().parent().parent().parent().find("a").first().text();
+
+            $("#lastmenu").html(lastmenu.replace(/(^\s*)|(\s*$)/g, ""));
+            $("#lastmenu").attr("menuid", bar);
+            $("#secmenu").html(secmenu.replace(/(^\s*)|(\s*$)/g, ""));
+            $("#secmenu").attr("menuid", $("#" + bar).parent().parent().attr("id"));
+            $("#firmenu").html(firmenu.replace(/(^\s*)|(\s*$)/g, ""));
+            $("#firmenu").attr("menuid", $("#" + bar).parent().parent().parent().parent().attr("id"));
+        } else {
+            $("#lastmenu").remove();
+            $("#secmenu").remove();
+            $("#firmenu").remove();
+        }
+
+        $('#logout').click(function () {
+            $.cookie('JSESSIONID', null);
+        })
+    });
+
+    function ckickTopMenu(obj) {
+        if ($(obj).attr("menuid")) {
+            var menuid = $(obj).attr("menuid");
+            if ($("#" + menuid + " a:eq(0)").hasClass("dropdown-toggle")) {
+                if ($("#" + menuid).parents('.nav-list li').size() > 0) {
+                    if ($("#" + menuid).parents('.nav-list li:eq(0)').hasClass("open")) {
+                        $("#" + menuid + " a").trigger("click");
+                    } else {
+                        $("#" + menuid).parents('.nav-list li').find("a:eq(0)").trigger("click");
+                        if (!$("#" + menuid).hasClass("open")) {
+                            $("#" + menuid + " a").trigger("click");
+                        }
+                    }
+                } else {
+                    $("#" + menuid + " a:eq(0)").trigger("click");
+                }
+            } else {
+                window.location.href = $("#" + menuid + " a:eq(0)").attr("href");
+            }
+        }
+    }
+
+
+    function toSelect(obj) {
+        $.cookie('selectionBar', obj.id, {
+            path: '/'
+        });
+    }
+
+    function addslidersModel(id, width) {
+        var modal = '<div id="' + id + '" class="modal right fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" tabindex="-1">\
+	            <div class="modal-dialog">\
+	                <div class="modal-content">\
+	                    <div class="center">\
+                            <img src="/img/icon/pageloading.gif" style="width:28px;height:28px;">\
+                        </div>\
+	                </div>\
+	            </div>\
+	        </div>';
+        var modal = $(modal).appendTo('body');
+        $(".modal-dialog").css("width", width);
+        return modal;
+    }
+    function openWorkRestSchedule() {
+        var modal = addslidersModel("work_rest_schedule_modal", "60%");
+        var url = "/main/queryRestSchedule";
+        modal.modal({
+            remote: url
+        }).on('hide.bs.modal', function () {
+            modal.remove();
+        });
+    }
+
+
+</script>
+</body>
+
+</html>
+
+Process finished with exit code 0
