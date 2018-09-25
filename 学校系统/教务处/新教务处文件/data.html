@@ -1,0 +1,844 @@
+C:\python3.6\python.exe C:/Users/w2239/Desktop/python/2/Three_project/xinjiaowuxitong/1.py
+登录成功
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		
+		<title></title>
+		<meta name="description" content="overview &amp; stats" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<!-- bootstrap & fontawesome -->
+		
+
+		<link rel="stylesheet" href="/css/xk/xk.css" id="main-ace-style"  />
+		
+		<link rel="stylesheet" href="/assets/font-awesome/4.1.0/css/font-awesome.min.css" />
+
+		
+		<!-- text fonts -->
+		
+		
+
+		<!-- ace styles -->
+		
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="/assets/css/ace-part2.min.css" />
+		<![endif]-->
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="/assets/js/html5shiv.min.js"></script>
+		<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="/assets/js/jquery/jquery-2.1.1.min.js"></script>
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+		<script src="/assets/js/jquery/jquery-1.11.1.min.js"></script>
+		<![endif]-->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='/assets/js/jquery.min.js'>"+"<"+"/script>");
+		</script>
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+		<script type="text/javascript">
+		 window.jQuery || document.write("<script src='/assets/js/jquery1x.min.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
+
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="/assets/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<!--[if lte IE 8]>
+		<script src="/assets/js/excanvas.min.js"></script>
+		<![endif]-->
+		
+		
+		
+		
+
+		<!-- ace scripts -->
+		
+		<script src="/assets/js/ace.all.min.js"></script>
+		
+		
+		
+		
+		<script type="text/javascript" src="/js/jQuery/jquery.cookie.js"></script>
+		<!-- commoncss -->
+		<link rel="stylesheet" href="/css/commons/commoncss.css" type="text/css"/>
+		<!-- commoncss -->
+		<!-- alert -->
+		
+		<script type="text/javascript" src="/js/customjs/urpjs.js"></script>
+
+		<script type="text/javascript" src="/assets/layer/layer.js"></script>
+		<!-- alert -->
+
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="/js/customjs/coursetable.js"></script>
+		<script type="text/javascript" src="/js/json/json2.js"></script>
+		<script type="text/javascript">
+			var yxkc = "";
+			var bxkc = new Array();
+			var weekZw = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
+			var searchTime = 0;
+			
+			var before_html = "";
+			function guolv(f){
+				if(f==1){
+					$("#sj").val("0_0");
+					if($("#div_kbt").position().top==0){
+						$(".div-sxl")[0].click();
+					}
+				}
+				
+				var sj = document.getElementById("sj").value.split("_");
+				$.ajax({
+					url: "/student/courseSelect/planCourse/courseList",
+					method: "post",
+					data: {fajhh: "3623",
+							jhxn: $("#jhxn").val(),
+							kcsxdm: $("#kcsxdm").val(),
+							kch: $("#kch").val(),
+							kcm: $("#kcm").val(),
+							kclbdm: $("#kclbdm").val(),
+							xq: sj[0],
+							jc: sj[1],
+							kyl: $("#kyl").val()
+						},
+					beforeSend : function(){
+						if(f==2){
+							var ph = $("#div_kbt").height();
+							var pw = $("#div_kbt").width();
+							$("#div_cover").css("height",ph);
+							$("#div_cover").css("width",pw);
+							var ih = $("#div_cover img").height();
+							var iw = $("#div_cover img").width();
+							var imt = 0;
+							var iml = 0;
+							if(ph>ih){
+								imt = (ph-ih)/2;
+							}
+							
+							if(pw>iw){
+								iml = (pw-iw)/2;
+							}
+							$("#div_cover").css("padding-top",imt);
+							$("#div_cover").css("padding-left",iml);
+							$("#div_cover").show();
+						}
+						$("#queryButton").attr("disabled","disabled");
+						$("#queryButton").html("<span class=\"btn-loading-pic\"></span> 正在查询...");
+					},
+					success: function(data){
+						yxkc = data["yxkclist"];
+						fillfakcbody(data);
+						if (searchTime == 0) {
+							getseldkc();
+							searchTime ++;
+						}
+						dealxtsjkc();
+					},
+					error: function(){
+						urp.alert("查询方案课程失败，请稍后再试...");
+					},
+					complete : function(){
+						if($("#div_cover").css("display")=="block"){
+							$("#div_cover").hide();
+						}
+						$("#queryButton").removeAttr("disabled");
+						$("#queryButton").html(before_html);
+					}
+				});
+			}
+			
+			//校验周次有无冲突
+			function checkZC(a,b){
+				var ff = false;
+				if(a!=undefined && a!="" && b!=undefined && b!="" 
+					&& Math.abs(parseInt(a, 2)&parseInt(b, 2))) {
+					ff = true;
+				}
+				
+				return ff;
+			}
+			
+			function queryZjJsJl(id, obj) {
+				if (id != undefined && $(obj).attr("title") == undefined) {
+					$(obj).css("cursor", "wait");
+					$.ajax({
+						url: "/student/courseSelect/queryTeacherJL",
+						method: "post",
+						data: {id: id },
+						dataType: "json",
+						success: function(d) {
+							console.log(d);
+							var cont = "负责教师：" + d[0][0] + "\r\n";
+							$(obj).attr("title", cont + (d[0][1]==null? "": d[0][1]));
+						},
+						error: function() {
+						},
+						complete : function(){
+							$(obj).css("cursor", "pointer");
+						}
+					});
+				}
+			}
+			
+			function leaveJs(obj) {
+				$(obj).css("cursor", "pointer");
+			}
+			
+			function fillfakcbody(d){
+				var fakccont = "";
+				var rwfalist = eval("("+d["rwfalist"]+")");
+				var kylMap = d["kylMap"];
+				var yxkclist = eval("(" + yxkc + ")");
+				//方案课程列表
+				if(rwfalist.length>0){
+					for(var i=0;i<rwfalist.length;i++){
+						var isShow = true;
+						var rwsjdd = rwfalist[i].kcsjddlist;
+						var rown = rwsjdd.length;
+						if(isShow){
+							fakccont += "<tr><td rowspan='"+rown+"'>";
+							var kylKey = rwfalist[i].termCode+"_"+rwfalist[i].courseNum+"_"+rwfalist[i].classNum;
+							var bkskyl = kylMap[kylKey] == undefined ? rwfalist[i].bkskyl : kylMap[kylKey];
+							if(bkskyl>0){
+								fakccont += "<input type='checkbox' \
+									id='"+rwfalist[i].courseNum+"_"+rwfalist[i].classNum+"_"+rwfalist[i].termCode+"' \
+									class='ace ace-checkbox-2' name='kcId' value='"+JSON.stringify(rwfalist[i])+"' \
+									onclick='dealkc(this);'/><span class='lbl'></span>";
+							}
+							fakccont += "</td>";
+							
+							fakccont += "<td rowspan='"+rown+"'>" +
+								(rwfalist[i].schemeYear == "学年季学期" ? "暂未维护" : rwfalist[i].schemeYear) + "</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].courseNum+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].kcm+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].classNum+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].xf+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].kclbmc+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].kcsxmc+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].kslxmc+"</td>";
+							fakccont += "<td onmouseenter='queryZjJsJl(\""+kylKey+"\", this);' onmouseleave='leaveJs(this);'\
+								 style='color:#579EC8;cursor:pointer;' rowspan='"+rown+"'>"+rwfalist[i].skjs+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+bkskyl+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].xkmssm+"</td>";
+							fakccont += "<td rowspan='"+rown+"'>"+rwfalist[i].xkkzsm+"</td>";
+							var xkxzsm = rwfalist[i].xkxzsm;
+							if(rwfalist[i].xkxzsm.length>8){
+								xkxzsm = "<span style='color:#579EC8;cursor:pointer;' title='"+rwfalist[i].xkxzsm+"'>\
+									"+rwfalist[i].xkxzsm.substring(0,9)+"...</span>";
+							}
+							fakccont += "<td rowspan='"+rown+"'>"+xkxzsm+"</td>";
+							var xkbz = rwfalist[i].xkbz;
+							if(rwfalist[i].xkbz.length>8){
+								xkbz = "<span style='color:#579EC8;cursor:pointer;' title='"+rwfalist[i].xkbz+"'>\
+									"+rwfalist[i].xkbz.substring(0,9)+"...</span>";
+							}
+							fakccont += "<td rowspan='"+rown+"'>"+xkbz+"</td>";
+							for(var j=0;j<rown;j++){
+								var sjdd = rwsjdd[j];
+								if(j>0){
+									fakccont += "<tr>";
+								}
+								fakccont += "<td>"+sjdd.zcsm+"</td>";
+								fakccont += "<td>"+sjdd.skxq+"</td>";
+								fakccont += "<td>"+sjdd.skjc+(sjdd.skjc=="" || sjdd.skjc==null ? "" :  "~"+(parseInt(sjdd.cxjc)+parseInt(sjdd.skjc)-1))+"</td>";
+								fakccont += "<td>"+sjdd.xqm+"</td>";
+								fakccont += "<td>"+sjdd.jasm+"</td>";
+								fakccont += "<td>"+sjdd.jxlm+"</td></tr>";
+							}
+						}
+					}
+				}else{
+					fakccont = "<tr><td colspan='20' style='color:red;'>未查询到记录！</td></tr>";
+				}
+				$("#fakcxkbody").html(fakccont);
+			}
+			
+			//提交选课
+			function xuanze(){
+				var idarr = new Array();
+				var kcarr = new Array();
+				for(var i=0; i<bxkc.length; i++){
+					var qcjson = JSON.parse(bxkc[i]);
+					idarr[idarr.length] = qcjson.courseNum 
+						+ "_" + qcjson.classNum + "_" + qcjson.termCode;
+					kcarr[kcarr.length] = qcjson.kcm + "_" + qcjson.classNum;
+				}
+				$("#kcIds").val(idarr.join(","));
+				$("#kcms").val(kcarr.join(","));
+			}
+			
+			//重置选课
+			function jhqx(){
+				var temp = bxkc.slice(0);
+				for(var i=0; i<temp.length; i++){
+					var json = JSON.parse(temp[i]);
+					$("#"+json.courseNum+"_"+json.classNum
+						+"_"+json.termCode).click();
+				}
+			}
+			
+			
+			function dealHiddenData(atom, checkStatus) {
+				if (checkStatus) {
+					bxkc[bxkc.length] = atom.value != undefined ? 
+						atom.value : JSON.stringify(atom);
+ 				} else {
+					for(var i=0; i<bxkc.length; i++) {
+						var json = JSON.parse(bxkc[i]);
+						var atomIds = (atom.value != undefined ? atom.id : 
+							atom.courseNum+"_"+atom.classNum+"_"+atom.termCode).split("_");
+						if (json.courseNum == atomIds[0] 
+							&& json.classNum == atomIds[1] 
+							&& json.termCode == atomIds[2]) {
+							bxkc.splice(i, 1);
+							break;
+						}
+					}
+				}
+			}
+			
+			//勾选或取消选择处理
+			function dealkc(atom){
+				var av = atom.id.split("_");
+			   	var kcval = eval("("+atom.value+")");
+			   	var checkStatus = atom.checked;
+			   	
+			   	dealHiddenData(atom, checkStatus);
+    			dealxtsjkc();
+			    
+       			var tsjddlist = kcval.kcsjddlist;
+       			if(tsjddlist!=null && tsjddlist.length>0 && tsjddlist[0].skjc){
+				    for(var i=0;i<tsjddlist.length;i++){
+				    	var kcsj = tsjddlist[i];
+				    	for(var j=0;j<kcsj.cxjc;j++){
+				    		var filterObj = $("#" + kcsj.skxq + "_" + (parseInt(kcsj.skjc)+j)) ;
+				    		if (checkStatus){
+				    			checkedTimeFilter(filterObj,kcval);
+				    		} else {
+				    			resetTimeFilter(filterObj, kcval);
+				    		}
+				    	}
+				    }
+       			}
+			}
+			
+			//选中一门课程时处理其他时间冲突课程
+           function dealxtsjkc(){
+       			var allkc = $("input[type=checkbox][name=kcId]");
+       			$(allkc).prop("disabled",false);
+       			$(allkc).prop("checked",false);
+       			for(var i=0; i<bxkc.length; i++) {
+       				var bxkcjson = JSON.parse(bxkc[i]);
+       				var bxkcId = bxkcjson.courseNum + "_" + bxkcjson.classNum +
+           							"_" + bxkcjson.termCode;
+           			$("#" + bxkcId).prop("checked", true);
+           			allkc = $(allkc).not("#" + bxkcId);
+       			}
+           		if(bxkc!=undefined && bxkc.length>0){
+           			if(allkc!=undefined && allkc.length>0){
+           				for(var i=0; i<allkc.length; i++){
+           					var tempyxkcdata = "";
+           					var tempallkcdata = "";
+           					nextkc:
+           					for(var j=0; j<bxkc.length; j++){
+           						tempyxkcdata = JSON.parse(bxkc[j]);
+           						tempallkcdata = eval("("+allkc[i].value+")");
+           						
+           						if(tempallkcdata.courseNum==tempyxkcdata.courseNum){
+           							$(allkc[i]).prop("disabled",true);
+           							break nextkc;
+           						}
+       							var yxkcsj = tempyxkcdata.kcsjddlist;
+       							var allkcsj = tempallkcdata.kcsjddlist;
+       							for(var a=0; a<yxkcsj.length; a++){
+       								for(var b=0; b<allkcsj.length; b++){
+       									if(checkZC(allkcsj[b].skzc,yxkcsj[a].skzc)){
+		           							for(var x=0; x<parseInt(allkcsj[b].cxjc); x++){
+		           								for(var y=0; y<parseInt(yxkcsj[a].cxjc); y++){
+		           									if(yxkcsj[a].skxq == allkcsj[b].skxq 
+		           										&& (parseInt(yxkcsj[a].skjc)+y) == (parseInt(allkcsj[b].skjc)+x)){
+		           										$(allkc[i]).prop("disabled",true);
+		           										break nextkc;
+		           									}
+		           								}
+		           							}
+       									}
+       								}
+       							}
+           					}
+           				}
+           			}
+           		}
+           	}
+			
+			function resizediv(){
+				var iframe = window.parent.document.getElementById("ifra");
+				$("#div_kc_tj").css("height",$(iframe).height());
+				$("#div_kb").css("max-height",$(iframe).height()-20);
+				if($("#div_kbt").position().top<0){
+					$("#div_kbt").css("top",-$("#div_kb").height());
+				}
+			}
+			//初始化筛选器
+			function getseldkc(){
+				var yxkcObj = eval("("+yxkc+")");
+				for(var i=0;i<yxkcObj.length;i++){
+					var tkcddxxarr = yxkcObj[i].timeAndPlaceList;
+					for(var j=0;j<tkcddxxarr.length;j++){
+						var tkcddxx = tkcddxxarr[j];
+						for(var z=0;z<tkcddxx.continuingSession;z++){
+							var tjc = tkcddxx.classSessions+z;
+							var trid = tkcddxx.classDay +"_"+ tjc;
+							var title = $("#"+trid).attr("title") == undefined ? "" : $("#"+trid).attr("title");
+							if (title != "") {
+								title += "\r\n";
+							}
+							$("#"+trid).attr("title",title + yxkcObj[i].courseName + "_" 
+								+ yxkcObj[i].id.coureSequenceNumber);
+							$("#"+trid).css("background-color","#C8D2D8");
+						}
+					}
+				}
+				
+				var s = eval('({"bz":"","codeTermSectionPK":{"jclxdm":"01","xqdm":"1","xqlxdm":"1"},"swjc":4,"tjc":12,"wsjc":3,"xqzs":24,"xwjc":5,"zc":"111111111111111111110000","zcsm":"全周上课","zdlsjcs":5,"zs":20,"zslsjcs":1,"zts":7})');
+				for(var i=1;i<=s.zts;i++){
+					for(var j=1;j<=s.tjc;j++){
+						var tdobj = $("#"+i+"_"+j);
+						if($(tdobj).attr("title")==undefined){
+							$(tdobj).attr("title","");
+						}
+						if($(tdobj).css("background-color") != "rgb(200, 210, 216)") {
+							$(tdobj).css("background-color","rgba(142,189,221,1)");
+						}
+						resetTimeFilter(tdobj);
+					}
+				}
+			}
+			
+			function removePix(obj){
+				$(obj).parent().remove();
+				guolv(1);
+			}
+			
+			function addSjpix(id){
+				var ids = id.split("_");
+				$("#span-sjpix").remove();
+				var sjPix = "<span id='span-sjpix'><span style='background-color:#91b8d0;\
+					font-size:12px;padding:5px;border-radius:3px;margin-left:5px;'>\
+					" + weekZw[parseInt(ids[0]) -1] + "第" + ids[1] + "节</span><span onclick='removePix(this);' \
+					class='badge badge-danger' style='margin:0;padding: 4px 7px;cursor:pointer;'>\
+					<i class='fa fa-trash-o'></i></span></span>";
+				
+				$("#div-timetj").append(sjPix);
+			}
+			
+			//设置筛选器可选
+			var bgcolor = "";
+			function resetTimeFilter(tdobj, tv){
+				var kcs = $(tdobj).find("input[type=hidden]");
+				if (kcs.length <= 1 || tv == undefined) {
+					$(tdobj).click(function(){
+						$("#sj").val($(this).attr("id"));
+						addSjpix($(this).attr("id"));
+						guolv(2);
+					});
+					
+					$(tdobj).unbind("mouseenter mouseleave");
+					$(tdobj).hover(function(){
+						bgcolor = $(tdobj).css("background-color");
+						$(this).css("background-color", "rgba(142,189,221,0.5)");
+	                },function(){
+						$(this).css("background-color", bgcolor);
+					});
+					$(tdobj).html("");
+				} else {
+					$("#" +$(tdobj).attr("id")+"_"+tv.courseNum+"_"+
+						tv.classNum+"_"+tv.termCode).remove();
+				}
+			}
+			
+			//设置筛选器选中
+			function checkedTimeFilter(tdobj,tv){
+				$(tdobj).css("cursor","default");
+				$(tdobj).unbind("click");
+				$(tdobj).unbind("mouseenter mouseleave");
+				var divid = "div_"+$(tdobj).attr("id")+"_"+tv.courseNum+"_"+tv.classNum+"_"+tv.termCode;
+				var tdh = $(tdobj).height()-1;
+				var tdw = $(tdobj).width()-2;
+				var apt = (tdh-18)/2;
+				$(tdobj).hover(function(){
+					$(this).find("div").first().css("background-color", "black");
+					$(this).find("div").first().css("opacity","0.7");
+					$(this).find("div").first().css("cursor","pointer");
+					$(this).find("div").first().append(
+						"<a href='#' style='display: inline-block;margin-top:"+apt+"px;'>\
+						 	<i class='ace-icon fa fa-times red'></i></a>");
+					
+                },function(){
+					$(this).find("div").first().css("background-color", "#82AF6F");
+					$(this).find("div").first().css("opacity","1");
+					$(this).find("div").first().find("a").remove();
+				});
+				
+				var divObj = $(tdobj).find("div");
+				if (divObj.length == 1) {
+					$(divObj).prepend("<input id='"+$(tdobj).attr("id")+"_"+
+						tv.courseNum+"_"+tv.classNum+"_"+tv.termCode+"' \
+						type='hidden' value='"+JSON.stringify(tv)+"'/>");
+					$(divObj).attr("title", "移除意向课程");
+				} else {
+					var tdcont = "<div title='移除意向"+tv.kcm+"_"+tv.classNum+"' \
+						onclick='quitSelection(this, event)' class='div-kbt-trans' \
+						style='margin:0;text-align:center;height:34px;width:100%;\
+						background-color: #82AF6F;opacity:1;'>\
+						<input id='"+$(tdobj).attr("id")+"_"+
+						tv.courseNum+"_"+tv.classNum+"_"+tv.termCode+"' \
+						type='hidden' value='"+JSON.stringify(tv)+"'/></div>";
+					$(tdobj).html(tdcont);
+				}
+			}
+			
+			var tempSaveObj = new Array();
+			function tempSave(flag, val) {
+				tempSaveObj = new Array();
+				$("input[type=checkbox][name^=temp]:checked", window.parent.document).each(function() {
+					tempSaveObj[tempSaveObj.length] = $(this).val();
+				});
+			}
+			
+			//筛选器退课
+			function quitSelection(obj, e){
+				e.stopPropagation();
+				var confirmTip = "请勾选移除意向课程：<br>";
+				$(obj).find("input").each(function() {
+					var so = JSON.parse($(this).val());
+					
+					confirmTip += "<label><input onclick='$(\"#ifra\")[0].contentWindow.tempSave();' \
+						name='temp|"+$(this).attr("id")+"' \
+						type='checkbox' class='ace' value='"+JSON.stringify(so)+"'>\
+						<span class='lbl'>课程名：" + so.kcm + 
+						"&nbsp;&nbsp;课序号：第" + so.classNum + "课堂" +
+						"&nbsp;&nbsp;上课教师：" + so.skjs + "</span></label><br>";
+				});
+				parent.urp.confirm(confirmTip, function(f){
+					if(f){
+						if (tempSaveObj.length > 0) {
+							for (var i=0; i<tempSaveObj.length; i++ ) {
+								var json = JSON.parse(tempSaveObj[i]);
+								dealHiddenData(json, false);
+								
+								var tkcddxxarr = json.kcsjddlist;
+								for(var j=0;j<tkcddxxarr.length;j++){
+									var tkcddxx = tkcddxxarr[j];
+									for(var z=0;z<tkcddxx.cxjc;z++){
+										var tjc = parseInt(tkcddxx.skjc)+z;
+										var trid = tkcddxx.skxq +"_"+ tjc;
+										resetTimeFilter($("#"+trid), json);
+									}
+								}
+							}
+							dealxtsjkc();
+						}
+					}
+				});
+			}
+			
+			function changeKyl(obj){
+				if($(obj).is(":checked")){
+					$("#kyl").val(1);
+				} else{
+					$("#kyl").val(0);
+				}
+				if($("#span-sjpix").length>0){
+					guolv(2);
+				}else{
+					guolv(1);
+				}
+			}
+			
+			$(function(){
+				coursetable.initSimpleTable('myselectTable','');
+				$("#myselectTable").find("table").css("margin","0");
+				
+				before_html = $("#queryButton").html();
+				
+				var sxl = $("#div_kbt");
+				$(sxl).css("top",-$("#div_kb").height());
+				
+				$(".div-sxl")[0].onclick = function() {
+					if($(sxl).position().top<0){
+						$(sxl).css("top","0px");
+						$("#lal-sxl").text("点击收起时间筛选器");
+					}else{
+						$(sxl).css("top",-$("#div_kb").height());
+						$("#lal-sxl").text("点击打开时间筛选器");
+					}
+				};
+				
+				guolv(1);
+				resizediv();
+				$(sxl).addClass("div-kbt-trans");
+			});
+		</script>
+		<style>
+			body{
+				background-color:white;
+				margin:0;
+				padding:0;
+			}
+			.div-kbt{
+				width:28%;
+				position:absolute;
+				top:0px;
+				right:20px;
+				box-shadow:5px 5px 5px rgba(125,180,216,.5);
+				-webkit-box-shadow:5px 5px 5px rgba(125,180,216,.5);
+
+			}
+			.div-kbt-trans{
+				-webkit-transition: all 0.3s ease;
+				-moz-transition: all 0.3s ease;
+				transition: all 0.3s ease;
+			}
+			.div-sxl{
+				position:absolute;
+				padding:0;
+				margin:-1px 0 0;
+				width:150px;
+				height:20px;
+				background-color:#7DB4D8;
+				right:0px;
+    			border-radius: 0 0 0 20px;
+				-webkit-border-radius: 0px 0 0 20px;
+			}
+			#myselectTable{
+				background-color:white;
+				border:1px solid #7DB4D8;
+				margin:0;
+				padding:0;
+			}
+			.value_ele{
+				width:150px;
+			}
+			#courseList_table td, #courseList_table th {
+				padding: 4px !important;
+			}
+		</style>
+	
+	</head>
+	<body>
+		
+		<div class="col-xs-12" id="div_kc_tj" style="overFlow-x: hidden;OVERFLOW-Y:auto;padding:0;">
+			<form action="/student/courseSelect/planCourse/waitingfor?dealType=2" name="frm" method="POST" target="_parent">
+				<input type="hidden" name="tokenValue" value="cae48f9d7dd7d9202cd2ef5533ba20da">
+				<input type="hidden" name="fajhh" value="3623">
+				<input type="hidden" name="kcIds" id="kcIds" value="">
+				<input type="hidden" name="kcms" id="kcms" value="">
+				<input type="hidden" name="sj" id="sj" value="0_0">
+				<div class="profile-user-info profile-user-info-striped self" style="width:100%;">
+					<div class="profile-info-row">
+						<div class="profile-info-name"> 计划学年学期 </div>
+						<div class="profile-info-value">
+							<select id='jhxn'>
+								<option value="">全部</option>
+							 	
+						 			<option value="2020-2021-2-1" 
+						 				
+						 			>2020-2021学年春</option>
+							 	
+						 			<option value="2020-2021-1-1" 
+						 				
+						 			>2020-2021学年秋</option>
+							 	
+						 			<option value="2019-2020-2-1" 
+						 				
+						 			>2019-2020学年春</option>
+							 	
+						 			<option value="2019-2020-1-1" 
+						 				
+						 			>2019-2020学年秋</option>
+							 	
+						 			<option value="2018-2019-2-1" 
+						 				
+						 			>2018-2019学年春</option>
+							 	
+						 			<option value="2018-2019-1-1" 
+						 				 selected 
+						 			>2018-2019学年秋</option>
+							 	
+						 			<option value="2017-2018-2-1" 
+						 				
+						 			>2017-2018学年春</option>
+							 	
+						 			<option value="2017-2018-1-1" 
+						 				
+						 			>2017-2018学年秋</option>
+							 	
+							</select>
+						</div>
+						
+						<div class="profile-info-name"> 课程属性 </div>
+						<div class="profile-info-value">
+							<select id='kcsxdm'>
+								<option value="">全部</option>
+							 	
+							 		<option value="001" 
+							 			>必修</option>
+							 	
+							 		<option value="002" 
+							 			>选修</option>
+							 	
+							 		<option value="003" 
+							 			>任选</option>
+							 	
+							 		<option value="004" 
+							 			>辅修</option>
+							 	
+							 </select>
+						</div>
+					
+						<div class="profile-info-name"> 课程号 </div>
+						<div class="profile-info-value">
+							<input type="text" id="kch" value=""/>
+						</div>
+						
+						<div class="profile-info-name"> 课程名 </div>
+						<div class="profile-info-value">
+							<input type="text" id="kcm" value=""/>
+						</div>
+					</div>
+					
+					<div class="profile-info-row">
+						<div class="profile-info-name"> 课程类别 </div>
+						<div class="profile-info-value">
+							 <select class="form-control value_element" name="kclbdm" id="kclbdm">
+								<option value="">--全部--</option>
+								
+								
+									<option value="6">东西部联盟课程</option>
+								
+									<option value="703">工程技术与可持续发展</option>
+								
+									<option value="704">国际事务与全球视野</option>
+								
+									<option value="5">国际周课程</option>
+								
+									<option value="0">国家统一课</option>
+								
+									<option value="702">科学探索与生命教育</option>
+								
+									<option value="799">其它</option>
+								
+									<option value="700">人文艺术与中华文化传承</option>
+								
+									<option value="701">社会科学与公共责任</option>
+								
+									<option value="2">文化素质公选课</option>
+								
+									<option value="1">校级公共课</option>
+								
+									<option value="4">校外专家+国际周</option>
+								
+									<option value="3">校外专家开课</option>
+								
+							</select>
+						</div>
+					</div>
+					
+				</div>
+				<div style="padding-top:5px;" id="div-timetj">
+					<span style='background-color:#91b8d0;font-size:12px;padding:5px;border-radius:3px;'>
+						有课余量的课程
+						<input checked type="checkbox" class="ace" onclick='changeKyl(this);'/>
+					<span class="lbl"></span></span>
+					<input type="hidden" id='kyl' value="1"/>
+				</div>
+				<div class="center">
+					<button id="queryButton" class="btn btn-xs btn-info btn-round" onclick="guolv(1);return false;" 
+						style="margin:10px 0 !important;">
+						 <i class="fa fa-search bigger-120"></i> 查询
+					</button>
+				</div>
+			</form>
+			
+			<div>
+				<table id="courseList_table" class="table table-hover table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>选择</th>
+							<th>计划学年学期</th>
+							<th>课程号</th>
+							<th>课程名</th>
+							<th>课序号</th>
+							<th>学分</th>
+							<th>课程类别</th>
+							<th>课程属性</th>
+							<th>考试类型</th>
+							<th>教师</th>
+							<th>课余量</th>
+							<th>选课模式</th>
+							<th>选课控制</th>
+							<th>选课限制说明</th>
+							<th>备注</th>
+							<th>周次</th>
+							<th>星期</th>
+							<th>节次</th>
+							<th>校区</th>
+							<th>教室</th>
+							<th>教学楼</th>
+						</tr>
+					</thead>
+					<tbody id="fakcxkbody"></tbody>
+				</table>
+			</div>
+		</div>
+		<div class="div-kbt" id="div_kbt">
+			<div id="div_cover" style="position:absolute;top:0;left:0;display:none;background-color:rgba(0,0,0,0.3)">
+				<img src="/img/icon/t_loading.gif" style="height:160px;width:160px;">
+			</div>
+			<div id="div_kb" style="overFlow-x: hidden;OVERFLOW-Y:auto;margin:0;padding:0;">
+				<div id="myselectTable"></div>
+			</div>
+			<div class="div-sxl">
+	    		<label id="lal-sxl" style="line-height:1.2;margin-left:20px;font-size:12px;">
+	    			点击打开时间筛选器
+	    		</label>
+	    	</div>
+		</div>
+	
+	</body>
+</html>
+
+Process finished with exit code 0
